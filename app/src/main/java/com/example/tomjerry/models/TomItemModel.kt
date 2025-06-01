@@ -8,14 +8,17 @@ data class TomItemModel(
     val description: String,
     val imageResId: Int,
     val costInCheeses: Int,
+    val originalCostInCheeses: Int? = null,
 )
+
 val tomItemModel = listOf(
     TomItemModel(
         id = 1,
         itemTitle = "Sport Tom",
         description = "He runs 1 meter... trips over his boot.",
         imageResId = R.drawable.sport_tom,
-        costInCheeses = 3
+        costInCheeses = 3,
+        originalCostInCheeses = 5
     ),
     TomItemModel(
         id = 2,

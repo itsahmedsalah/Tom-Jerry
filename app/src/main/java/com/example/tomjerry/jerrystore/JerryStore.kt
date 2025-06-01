@@ -39,6 +39,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -63,7 +65,7 @@ fun JerryStore() {
     ) {
         JerryHeader()
         SearchBarComp()
-        TomOfferCard()
+        TomOfferBanner()
         SectionTitle()
         TomItemsList()
     }
@@ -85,7 +87,7 @@ fun JerryHeader() {
         Spacer(modifier = Modifier.width(8.dp))
         Column {
             Text(
-                "Hi, Jerry 👋",
+                "Hi, Jerry 👋🏻",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,
                 fontFamily = IBMPlexFont
@@ -105,23 +107,25 @@ fun JerryHeader() {
                 contentDescription = null,
                 modifier = Modifier
                     .border(
-                        width = 1.dp, color = Color(0xFFA5A6A4), shape = RoundedCornerShape(26)
+                        width = 1.dp, color = Color(0x261F1F1E), shape = RoundedCornerShape(26)
                     )
                     .padding(10.dp)
             )
             Box(
                 modifier = Modifier
                     .offset(x = 5.dp, y = (-5).dp)
-                    .size(14.dp)
-                    .clip(CircleShape)
-                    .background(darkBlue)
+                    .size(16.dp)
+                    .background(color = darkBlue, shape = CircleShape)
                     .align(Alignment.TopEnd),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     "3",
                     color = Color.White,
-                    fontSize = 10.sp
+                    fontSize = 10.sp,
+                    style = androidx.compose.ui.text.TextStyle(
+                        textAlign = TextAlign.Center
+                    )
                 )
             }
 
@@ -134,16 +138,28 @@ fun SearchBarComp() {
     Row(
         modifier = Modifier.padding(top = 12.dp), verticalAlignment = Alignment.CenterVertically
     ) {
-        Card(
-            modifier = Modifier.weight(1F), colors = CardDefaults.cardColors(
-                containerColor = Color.White
-            )
-        ) {
-            Icon(
-                painter = painterResource(R.drawable.search),
-                contentDescription = "Search",
-                modifier = Modifier.padding(12.dp)
-            )
+        Box(modifier = Modifier.weight(1F)) {
+            Card(
+                modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(
+                    containerColor = Color.White
+                )
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.search),
+                    contentDescription = "Search",
+                    modifier = Modifier.padding(12.dp)
+                )
+            }
+            Text(
+                "Search about tom ...",
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(end = 60.dp),
+                color = Color(0x80969799),
+                fontWeight = FontWeight.Normal,
+                fontFamily = IBMPlexFont,
+
+                )
         }
         Spacer(modifier = Modifier.width(8.dp))
         Button(
@@ -164,7 +180,7 @@ fun SearchBarComp() {
 }
 
 @Composable
-fun TomOfferCard() {
+fun TomOfferBanner() {
     Box(
         modifier = Modifier
             .padding(top = 24.dp)
@@ -178,8 +194,8 @@ fun TomOfferCard() {
                 .clip(RoundedCornerShape(16.dp))
                 .background(
                     brush = Brush.linearGradient(
-                        colors = listOf(Color(0xFF005789), Color(0xFF00ADEF)), // customize these
-                        start = Offset(0f, 0f), end = Offset.Infinite // ⬅ bottom-right corner
+                        colors = listOf(Color(0xFF03446A), Color(0xFF0685D0)),
+                        start = Offset(0f, 0f), end = Offset.Infinite
                     )
                 )
                 .padding(start = 16.dp, top = 12.dp, bottom = 12.dp, end = 90.dp),
@@ -241,7 +257,9 @@ fun TomOfferCard() {
 @Composable
 fun SectionTitle() {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 28.dp),
 
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -261,7 +279,8 @@ fun SectionTitle() {
             modifier = Modifier.padding(end = 4.dp)
         )
         Icon(
-            painter = painterResource(R.drawable.left_arrow), contentDescription = null
+            painter = painterResource(R.drawable.left_arrow), contentDescription = null,
+            tint = darkBlue
         )
     }
 }
@@ -298,7 +317,7 @@ fun TomItem(tomItemModel: TomItemModel) {
         ) {
             Column(
                 modifier = Modifier
-                    .padding(top = 92.dp, start = 8.dp, end = 8.dp, bottom = 8.dp)
+                    .padding(top = 88.dp, start = 8.dp, end = 8.dp, bottom = 8.dp)
                     .fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -315,10 +334,12 @@ fun TomItem(tomItemModel: TomItemModel) {
                     color = Color.Gray,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.weight(1f),
+                    lineHeight = 16.sp,
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis
 
-
-                    )
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                )
+                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier) {
                     Row(
                         modifier = Modifier
                             .clip(shape = RoundedCornerShape(8.dp))
@@ -333,6 +354,17 @@ fun TomItem(tomItemModel: TomItemModel) {
                             tint = darkBlue
                         )
                         Spacer(modifier = Modifier.width(4.dp))
+                        if (tomItemModel.originalCostInCheeses != null && tomItemModel.costInCheeses < tomItemModel.originalCostInCheeses) {
+                            Text(
+                                "${tomItemModel.originalCostInCheeses}",
+                                color = darkBlue,
+                                fontSize = 12.sp,
+                                fontFamily = IBMPlexFont,
+                                fontWeight = FontWeight.Medium,
+                                modifier = Modifier.padding(end = 2.dp),
+                                textDecoration = TextDecoration.LineThrough
+                            )
+                        }
                         Text(
                             "${tomItemModel.costInCheeses} cheeses",
                             color = darkBlue,
@@ -359,7 +391,6 @@ fun TomItem(tomItemModel: TomItemModel) {
             painter = painterResource(tomItemModel.imageResId),
             contentDescription = null,
             modifier = Modifier.size(100.dp)
-
         )
     }
 }
