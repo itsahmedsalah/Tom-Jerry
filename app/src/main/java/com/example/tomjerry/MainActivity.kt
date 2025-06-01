@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.tomjerry.jerrystore.JerryStore
+import com.example.tomjerry.jerrystore.JerryStoreScreen
+import com.example.tomjerry.tomkitchen.TomKitchenScreen
 
 import com.example.tomjerry.ui.theme.TomJerryTheme
 
@@ -14,7 +15,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TomJerryTheme {
-                JerryStore()
+                //JerryStoreScreen()
+                TomKitchenScreen()
+
             }
         }
     }
