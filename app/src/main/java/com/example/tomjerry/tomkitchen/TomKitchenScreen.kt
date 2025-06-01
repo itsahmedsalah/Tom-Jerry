@@ -11,9 +11,11 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -23,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -115,5 +118,51 @@ fun TomKitchenScreen() {
                 )
             }
         }
+
+        Image(
+            painter = painterResource(R.drawable.spagity_dish),
+            contentDescription = "Pasta",
+            modifier = Modifier
+                .size(height = 210.dp, width = 230.dp)
+                .align(Alignment.TopEnd)
+                .offset(y = (10).dp)
+                .padding(end = 14.dp)
+               ,
+            contentScale = ContentScale.FillBounds
+        )
+        Column(modifier = Modifier.padding(start = 16.dp, top = 60.dp)) {
+            Row {
+                Icon(
+                    painter = painterResource(R.drawable.ruler),
+                    contentDescription = "Ruler",
+                    tint = Color.White
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    "High tension",
+                    color = Color.White,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    fontFamily = IBMPlexFont
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Row {
+                Icon(
+                    painter = painterResource(R.drawable.chef),
+                    contentDescription = "Ruler",
+                    tint = Color.White
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    "Shocking foods",
+                    color = Color.White,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    fontFamily = IBMPlexFont
+                )
+            }
+        }
+
     }
 }
