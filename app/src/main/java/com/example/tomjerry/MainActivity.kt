@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.tomjerry.jerrystore.JerryStoreScreen
+import com.example.tomjerry.tomaccount.TomAccountScreen
 import com.example.tomjerry.tomkitchen.TomKitchenScreen
 
 import com.example.tomjerry.ui.theme.TomJerryTheme
@@ -16,8 +17,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             TomJerryTheme {
                 //JerryStoreScreen()
-                TomKitchenScreen()
-
+                //TomKitchenScreen()
+                TomAccountScreen()
             }
         }
     }

@@ -114,7 +114,7 @@ fun JerryHeader() {
             )
             Box(
                 modifier = Modifier
-                    .offset(x = 5.dp, y = (-5).dp)
+                    .offset(x = 1.dp, y = (-4).dp)
                     .size(16.dp)
                     .background(color = darkBlue, shape = CircleShape)
                     .align(Alignment.TopEnd),
